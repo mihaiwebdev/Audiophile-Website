@@ -1,0 +1,491 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+/* shared */
+.container{
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.btn{
+  width: 164px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  transition: all 0.1s ease;
+}
+.btn:hover{
+  transform: scale(0.95);
+}
+
+.lnk {
+  transition: all 0.2s ease;
+}
+.lnk:hover{
+  color: rgba(216, 125, 74, 0.6);
+}
+
+.hamburger{
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  
+}
+.hamburger>div{
+  width: 25px;
+  height: 2px;
+  background-color: #fff;
+  position: relative;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.3s 0.1s ease-in;
+}
+.hamburger>div::after{
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 2px;
+  background-color: #fff;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.3s 0.1s ease-in;
+
+}
+.hamburger>div::before{
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 2px;
+  background-color: #fff;
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.1s ease-in;
+  
+}
+.hamburger-nav{
+  opacity: 0;
+  position: absolute;
+  background-color:#fff;
+  color: #000;
+  top: 68px;
+  left:0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
+  align-items: center;
+  z-index: 2;
+  transform: translateY(-120%);
+  transition: transform 0.4s ease-in, opacity 0.6s ease-in-out;
+}
+.hamburger-nav .s1-headphones{
+  background-size: 48%;
+  top: -3rem;
+}
+.hamburger-nav .s1-speakers{
+  background-size: 48%;
+  top: -3rem;
+}
+.hamburger-nav .s1-earphones{
+  background-size: 48%;
+  top: -3rem;
+}
+.hamburger.opened>div{
+  transform: translate(-13px,-7px) rotate(-45deg);
+}
+.hamburger.opened>div::before{
+  transform: translateX(-30px);
+  opacity: 0;
+}
+.hamburger.opened>div::after {
+  transform: translate(-13px, 14px) rotate(90deg);
+}
+.hamburger.opened .hamburger-nav{
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.cart{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.navbar {
+  height: 96px;
+  transition: all 0.4s ease;
+  background-color: #191919;
+  color: #fff;
+}
+.nav-small {
+  height: 68px;
+}
+.nav-small>div{
+  border: none;
+}
+
+.header{
+  background-color: #191919;
+  color: #fff;
+}
+
+.radio{
+  position: relative;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+ 
+}
+.radio-label {
+  border-color: #d87d4a;
+  border-width: 2px;
+  cursor: pointer;
+  
+}
+.radio::before{
+  content: '';
+  display: flex;
+  align-items: center;
+  margin: auto;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-shadow:rgb(207 207 207) 0px 0px 0px 1px inset;
+  background: white;
+  border-radius: 50%;
+ 
+}
+
+.radio:checked::after{
+  content: '';
+  display: flex;
+  align-items: center;
+  margin: auto;
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background:rgb(216, 125, 74);
+  border-radius: 100%;
+ 
+}
+
+
+/* cards*/
+.s1-speakers{
+  position: absolute;
+  background: url("./assets/shared/desktop/image-speakers.png") no-repeat center center /cover;
+  width: 100%;
+  height: 100%;
+  background-size: 64%;
+  top: -4rem;
+}
+.s1-headphones{
+  position: absolute;
+  background: url("./assets/shared/desktop/image-headphones.png") no-repeat center center /cover;
+  width: 100%;
+  height: 100%;
+  background-size: 64%;
+  top: -4rem;
+}
+.s1-earphones{
+  position: absolute;
+  background: url("./assets/shared/desktop/image-earphones.png") no-repeat center center /cover;
+  width: 100%;
+  height: 100%;
+  background-size: 64%;
+  top: -4rem;
+}
+
+.footer-about{
+  width: 540px;
+}
+
+
+
+/* Home */
+.hero-image{
+  background: url('./assets/home/desktop/image-hero.jpg') no-repeat center center /cover;
+}
+
+.featured {
+  padding: 160px 0 100px 0;
+  width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+.new-prod{
+  letter-spacing: 0.5rem;
+  
+}
+
+.about{
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* home-featured */
+.home-zx9{
+  height: 560px;
+  width: 100%;
+  background: url("./assets//home/desktop/pattern-circles.svg") no-repeat -130px 40px /cover;
+  background-size: 70%;
+  background-color:#d87d4a;
+  margin: 45px 0;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: end;
+  text-align: start;
+  position: relative;
+}
+.home-zx9>div{
+  background: url("./assets/home/mobile/image-speaker-zx9.png") no-repeat center 70px /cover;
+  width: 371.5px;
+  height: 420px;
+  background-size: 80%;
+  position: absolute;
+  top: 25%;
+  left: 50px;
+}
+
+.home-zx7{
+  background: url("./assets/home/mobile/image-speaker-zx7.jpg") no-repeat center center /cover;
+  width: 100%;
+  height: 320px;
+  border-radius: 7px;
+  margin-bottom: 45px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.home-yx1{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 7px;
+}
+.home-yx1 .yx1-image{
+  background: url("./assets/home/mobile/image-earphones-yx1.jpg") no-repeat center center /cover;
+  width: 49%;
+  height: 320px;
+  border-radius: 7px;
+}
+.home-yx1 .yx1-title{
+  width: 49%;
+  height: 320px;
+  margin-top: 20px;
+  background-color: #f1f1f1;
+  border-radius: 7px;
+  margin: 0;
+}
+
+.man-photo{
+  background: url("./assets/shared/desktop/image-best-gear.jpg") no-repeat center center /cover;
+  width: 50%;
+  height: 588px;
+  border-radius: 7px;
+  margin-bottom: 50px;
+}
+
+
+/* Headphones */
+.product-photo-box{
+  width: 45%;
+  height: 550px;
+  border-radius: 7px;
+  margin-bottom: 50px;
+  background-color: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-photo{
+  background: url("./assets/product-xx99-mark-two-headphones/desktop/image-product.jpg") no-repeat center center /cover;
+  margin-top: 50px;
+  width: 100%;
+  height: 550px;
+  border-radius: 7px;
+  margin-bottom: 50px;
+}
+.product-photo.small{
+  height: 64px;
+  margin: 10px 0;
+}
+.product-photo.mark-1{
+  background: url("./assets/product-xx99-mark-one-headphones/desktop/image-product.jpg") no-repeat center center /cover;
+}
+.product-photo.xx59{
+  background: url("./assets/product-xx59-headphones/desktop/image-product.jpg") no-repeat center center /cover;
+}
+
+
+/* Speakers */
+.product-photo.zx9{
+  background: url("./assets/product-zx9-speaker/desktop/image-product.jpg") no-repeat center center /cover;
+}
+.product-photo.zx7{
+  background: url("./assets/product-zx7-speaker/desktop/image-product.jpg") no-repeat center center /cover;
+}
+
+/* earphones */
+.product-photo.yx1{
+  background: url("./assets/product-yx1-earphones/desktop/image-product.jpg") no-repeat center center /cover;
+}
+
+
+
+/* Product Pages */
+
+/* Mark 2 headphones */
+.product-gallery{
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+.product-gallery-span{
+  width: 100%;
+  height: 592px;
+  border-radius: 8px;
+}
+.product-gallery.man-image{
+  background: url("./assets/product-xx99-mark-two-headphones/desktop/image-gallery-1.jpg") no-repeat center center /cover;
+
+}
+.product-gallery.table-image{
+  background: url("./assets/product-xx99-mark-two-headphones/desktop/image-gallery-2.jpg") no-repeat center center /cover;
+
+}
+.product-gallery-span.mark2-image{
+  background: url("./assets/product-xx99-mark-two-headphones/desktop/image-gallery-3.jpg") no-repeat center center /cover;
+ 
+}
+
+/* related */
+.xx99-mark-1{
+  background: url("./assets/product-xx99-mark-one-headphones/mobile/image-product.jpg") no-repeat center center /cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+.xx99-mark-2{
+  background: url("./assets/product-xx99-mark-two-headphones/mobile/image-product.jpg") no-repeat center center /cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+.xx59{
+  background: url("./assets/product-xx59-headphones/mobile/image-product.jpg") no-repeat center center /cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+.zx9 {
+  background: url("./assets/product-zx9-speaker/mobile/image-product.jpg") no-repeat center center /cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+.zx7 {
+  background: url("./assets/product-zx7-speaker/mobile/image-product.jpg") no-repeat center center /cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+.yx1 {
+  background: url("./assets/product-yx1-earphones/mobile/image-product.jpg") no-repeat center center /cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+/* Mark headphones */
+.product-gallery.mark1-gallery-1{
+  background: url("./assets/product-xx99-mark-one-headphones/desktop/image-gallery-1.jpg") no-repeat center center /cover;
+ 
+}
+.product-gallery.mark1-gallery-2{
+  background: url("./assets/product-xx99-mark-one-headphones/desktop/image-gallery-2.jpg") no-repeat center center /cover;
+
+}
+.product-gallery-span.mark1-gallery-3{
+  background: url("./assets/product-xx99-mark-one-headphones/desktop/image-gallery-3.jpg") no-repeat center center /cover;
+ 
+}
+
+/* xx59 */
+
+.product-gallery.xx59-gallery-1{
+  background: url("./assets/product-xx59-headphones/desktop/image-gallery-1.jpg") no-repeat center center /cover;
+}
+.product-gallery.xx59-gallery-2{
+  background: url("./assets/product-xx59-headphones/desktop/image-gallery-2.jpg") no-repeat center center /cover;
+}
+.product-gallery-span.xx59-gallery-3{
+  background: url("./assets/product-xx59-headphones/desktop/image-gallery-3.jpg") no-repeat center center /cover;
+}
+
+
+/* Speakers gallery */
+
+.product-gallery.zx9-gallery-1{
+  background: url("./assets/product-zx9-speaker/desktop/image-gallery-1.jpg") no-repeat center center /cover;
+}
+.product-gallery.zx9-gallery-2{
+  background: url("./assets/product-zx9-speaker/desktop/image-gallery-2.jpg") no-repeat center center /cover;
+}
+.product-gallery-span.zx9-gallery-3{
+  background: url("./assets/product-zx9-speaker/desktop/image-gallery-3.jpg") no-repeat center center /cover;
+}
+.product-gallery.zx7-gallery-1{
+  background: url("./assets/product-zx7-speaker/desktop/image-gallery-1.jpg") no-repeat center center /cover;
+}
+.product-gallery.zx7-gallery-2{
+  background: url("./assets/product-zx7-speaker/desktop/image-gallery-2.jpg") no-repeat center center /cover;
+}
+.product-gallery-span.zx7-gallery-3{
+  background: url("./assets/product-zx7-speaker/desktop/image-gallery-3.jpg") no-repeat center center /cover;
+}
+
+/* earphone product */
+.product-gallery.yx1-gallery-1{
+  background: url("./assets/product-yx1-earphones/desktop/image-gallery-1.jpg") no-repeat center center /cover;
+}
+.product-gallery.yx1-gallery-2{
+  background: url("./assets/product-yx1-earphones/desktop/image-gallery-2.jpg") no-repeat center center /cover;
+}
+.product-gallery-span.yx1-gallery-3{
+  background: url("./assets/product-yx1-earphones/desktop/image-gallery-3.jpg") no-repeat center center /cover;
+}
