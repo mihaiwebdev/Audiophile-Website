@@ -2,8 +2,6 @@
 
 ### This is my Final Project for **CS50x** course
 
-#### Video Demo: <https://www.youtube.com/watch?v=AZbqK4VDGl4>
-
 ### Description:
 
     This is a Web application which I created with React.js framework and styled it tailwindCss and also some plain css.
