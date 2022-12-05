@@ -1,4 +1,4 @@
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 import ProductContext from "../context/ProductContext";
 import {SiVerizon} from 'react-icons/si';
@@ -7,7 +7,7 @@ import {SiVerizon} from 'react-icons/si';
 function Success() {
 
     const {cartProducts, cartTotal, removeAll} = useContext(ProductContext);
-
+     
     return (
         <div id='successOrder' className='absolute container w-screen h-screen'>
             <div className="cart">

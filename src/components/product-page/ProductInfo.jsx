@@ -7,7 +7,8 @@ import {motion} from "framer-motion";
 
 function ProductInfo({product, newProd}) {
 
-    const {amount, addToCart, addOne, minusOne, setTotal, setAmount} = useContext(ProductContext)
+    const {amount, addToCart, addOne,
+           minusOne, setTotal, setAmount} = useContext(ProductContext)
 
     const setCart = (prod) => {
         addToCart(prod);

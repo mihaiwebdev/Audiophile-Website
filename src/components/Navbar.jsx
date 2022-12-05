@@ -1,5 +1,5 @@
-import {Link} from 'react-router-dom'
-import { useContext, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { useContext, useEffect, useState } from 'react'
 import ProductContext from '../context/ProductContext'
 import {AiOutlineShoppingCart} from 'react-icons/ai'
 import Cart from './cart/Cart'
@@ -11,6 +11,8 @@ import HeadphonesCard from './nav-cards/HeadphonesCard'
 
 function Navbar({pathname}) {
     
+    const [cartShowing, setCartShowing] = useState(false)
+   
     const {cartProducts} = useContext(ProductContext);
 
     const itemsNum = () => cartProducts.reduce((sum, product)=> sum + product.quantity, 0)
@@ -22,12 +24,14 @@ function Navbar({pathname}) {
         }
     }, [pathname]) 
 
-    window.addEventListener('scroll', () => {
-        
+     
+    window.addEventListener('scroll', () => {  
+
         if(window.pageYOffset >= 450)
         {
             document.getElementById('navbar').classList.add('nav-small')
-        }else {
+
+        } else {
             document.getElementById('navbar').classList.remove('nav-small')
         }
     })
@@ -37,14 +41,16 @@ function Navbar({pathname}) {
         document.body.classList.toggle('overflow-hidden');
     }
 
-    const showCart = () => document.getElementById('cart').classList.toggle('hidden');
+    const showCart = () => {
+        setCartShowing(true)
+    }
     
     const closeCart = (e) => {
-        if (e.target.classList.contains('container')){
-            document.getElementById('cart').classList.toggle('hidden');
+        if (e.target.classList.contains('container')) {
+            setCartShowing(false)
         }
-       
     }
+
 
     return (
             <nav id="navbar" className="fixed navbar w-full flex items-center justify-center z-10 py-6 px-6 xl:px-14 text-center ">
@@ -69,7 +75,7 @@ function Navbar({pathname}) {
                         <span id='cartItems' className='bg-orange-400 h-5 w-5 rounded-full absolute -top-2 -right-3 flex items-center justify-center'>{itemsNum()}</span>
                     </button>
 
-                    <div id='cart' onClick={closeCart} className='absolute hidden w-screen h-screen'>
+                    <div id='cart' onClick={(e)=> closeCart(e)} className={`${!cartShowing && 'hidden'}  absolute w-screen h-screen`}>
                         <Cart />
                     </div>
 
