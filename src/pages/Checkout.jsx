@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import { useEffect, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import ProductContext from "../context/ProductContext";
 import {GiCash} from 'react-icons/gi';
 import Navbar from "../components/Navbar";
@@ -22,10 +22,6 @@ function Checkout() {
 
     const {cartProducts, cartTotal} = useContext(ProductContext)
 
-    useEffect(() => {
-        document.getElementById('e-money').checked = true;
-    }, [])
-
     const checkEMoney = () => {
 
         setSelectCash(false)
@@ -43,41 +39,55 @@ function Checkout() {
     
         e.preventDefault();
 
-        const inputFields = document.querySelectorAll('input')
-
-        if (name.length > 3 && email.length > 3 && phone.length > 3  && address.length > 3 
-            && zip.length > 3 && city.length > 3 && country.length > 3 ) {
-            
-            if (selectCard) {
-                if ( cardCvv.length >= 3 
-                    && cardNum.length > 3) {
-                        navigate('/success')
-                    }
-            } else {
-                navigate('/success')
-            }
-
-        } 
+        const inputFields = document.querySelectorAll('input') 
+        const phoneRegex = /^(1[\s]?)?((?:[(](?:[0-9]{3})[)][\s]?)|(?:(?:[0-9]{3})[\s.-]?))([0-9]{4}|[2-9][02-9]{2}[\s.-]?){1}([0-9]{4}){1}$/
+        const digitsValidation = /^[0-9]+$/
 
         for (let i = 0; i < inputFields.length; i++) {
-            if (inputFields[i].type !== 'radio' && inputFields[i].value.length < 3){
+            if (inputFields[i].value.length < 1){
 
-                inputFields[i].classList.add('border-red-400')
                 const warning = document.createElement('p')
                 warning.innerText = 'Field cannot be empty'
                 warning.className = 'text-sm text-red-400'
+                inputFields[i].classList.add('border-red-400')
                 inputFields[i].parentElement.appendChild(warning)
                 
                 setTimeout(() => {
                     inputFields[i].parentElement.removeChild(warning)
                 }, 3000)
 
+                return false
+
             } else {
                 inputFields[i].classList.remove('border-red-400')
-    
+               
             }
+
+        }   
+
+        if (!phoneRegex.test(phone)) {
+            document.getElementById('phoneErr').classList.remove('hidden')
+            setTimeout(() => {
+                document.getElementById('phoneErr').classList.add('hidden')
+            }, 3500)
         }
-        
+        else if (!digitsValidation.test(cardCvv) || cardCvv.length !== 3) {
+            document.getElementById('cardCvvErr').classList.remove('hidden')
+            setTimeout(() => {
+                document.getElementById('cardCvvErr').classList.add('hidden')
+            }, 3500)
+        }
+        else if (!digitsValidation.test(cardNum)) {
+            document.getElementById('cardNumErr').classList.remove('hidden')
+            setTimeout(() => {
+                document.getElementById('cardNumErr').classList.add('hidden')
+            }, 3500)
+        }
+        else {
+         
+            navigate('/success')
+        }
+
     }
 
 
@@ -108,6 +118,7 @@ function Checkout() {
                                 <div className="flex flex-col mt-4">
                                     <label htmlFor="phone" className="text-sm font-medium mb-4">Phone Number</label>
                                     <input type="number" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+45 555-0136" className="py-3 border rounded-md px-4"/>
+                                    <p id='phoneErr' className='hidden text-sm text-red-400'> Please enter a valid number</p>
                                 </div>
                             </div>
 
@@ -153,10 +164,12 @@ function Checkout() {
                                 <div>
                                     <label htmlFor="e-number" className="font-medium sm:pr-16 lg:pr-20">Card number</label>
                                     <input type='text' placeholder="238521993" value={cardNum} onChange={(e) => setCardNum(e.target.value)} name='e-number' className="border pl-2 mt-2 w-full h-10 rounded-md"/>
+                                    <p id='cardNumErr' className='hidden text-sm text-red-400'> Please enter a valid card Number</p>
                                 </div>
                                 <div className="sm:ml-8">
                                     <label htmlFor="e-cvv" className="font-medium sm:pr-16 lg:pr-20">Card CVV</label>
                                     <input type='text' placeholder="395" value={cardCvv} onChange={(e) => setCardCvv(e.target.value)} name='e-cvv' className="border pl-2 w-full mt-2 h-10 rounded-md"/>
+                                    <p id='cardCvvErr' className='hidden text-sm text-red-400'> Card CVV must be 3 digits length</p>
                                 </div>
                             </div>
                             <div id="cashDetails" className={`flex items-center justify-between mt-10 mb-20 ${ selectCard && 'hidden'}`}>
